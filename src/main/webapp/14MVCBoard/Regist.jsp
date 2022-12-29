@@ -36,24 +36,8 @@
         #id_loading{position:absolute;top:530px;z-index:10;width:100%;text-align:center;display:block;}
     </style>
     <script>
-        /* 
-        수행과제
-        1. 폼값 전송시 빈값이 있는지 체크한다. 만약 빈값이 있는
-        경우에는 전송할 수 없다.
-        2. 아이디를 입력한 상태에서 중복확인 버튼을 눌러 팝업창으로
-        아이디를 전송한다.
-        3. 성별, 이메일 수신, SMS수신 라디오 버튼도 한가지를 선택해야
-        폼값을 전송할 수 있다.
-        4. 비밀번호의 경우 2개가 일치해야만 폼값을 전송할 수 있다.
-        5. 필수사항인 항목만 체크하세요.
-        6. 이메일의 도메인 입력시 셀렉트박스에서 선택한 도메인을
-        입력하세요...단, 직접입력을 선택한 경우에만 입력할 수 있도록
-        하고 그 외에는 readonly속성을 추가합니다. 
-        */
         var formValidate = function(frm) {
 
-            //form에서 this를 통해 전달한 dom과 동일하다.
-            // var frm = document.forms[0];
             //아이디 입력값 검증
             if (frm.id.value == '') {
                 alert("아이디를 입력하세요.");
@@ -127,13 +111,13 @@
             }
         } 
         function openModal() {
-        	 var usrId = document.getElementById("user_id").value;
-             if (usrId == '') {
+        	 var userId = document.getElementById("user_id").value;
+             if (userId == '') {
                 alert("아이디를 입력하고 누르삼");
              }
              else {
 
-                window.open("./id_overapping.jsp?usrId=" + usrId, "idover",
+                window.open("./id_overapping.jsp?userId=" + userId, "idover",
                       "width=400px, height=400px");
              }
           }
@@ -149,7 +133,6 @@
 		</div>
 		<div class="row">
 			<div class="col-3">
-			<%@ include file="../inc/left.jsp" %>
 			</div>
 			<div class="col-9 pt-3  d-flex justify-content-center">
 				<div>
@@ -160,7 +143,7 @@
 				                <col width="540px" />
 				            </colgroup>
 				            <tr>
-				                <td class="userTit"><span class="c_imp">*</span> 아이디</td>
+				                <td class="userTit"> 아이디</td>
 				                <td class="userVal">
 				                    <input type="text" name="id" value="" maxlength="15" class="userInput"
 				                        style="width:120px;" />                    
@@ -170,14 +153,14 @@
 				                </td>
 				            </tr>
 				            <tr>
-				                <td class="userTit"><span class="c_imp">*</span> 비밀번호</td>
+				                <td class="userTit"> 비밀번호</td>
 				                <td class="userVal">
 				                    <input type="password" name="pass1" value="" style="width:100px;" class="userInput"
 				                        maxlength="25" />
 				                </td>
 				            </tr>
 				            <tr>
-				                <td class="userTit"><span class="c_imp">*</span> 비밀번호 확인</td>
+				                <td class="userTit"> 비밀번호 확인</td>
 				                <td class="userVal">
 				                    <input type="password" name="pass2" value="" style="width:100px;" class="userInput"
 				                        maxlength="25" />
@@ -185,13 +168,13 @@
 				                </td>
 				            </tr>
 				            <tr>
-				                <td class="userTit"><span class="c_imp">*</span> 이름</td>
+				                <td class="userTit"> 이름</td>
 				                <td class="userVal">
 				                    <input type="text" name="name" value="" style="width:120px;" class="userInput" maxlength="10" />
 				                </td>
 				            </tr>
 				            <tr>
-				                <td class="userTit"><span class="c_imp">*</span> 이메일</td>
+				                <td class="userTit"> 이메일</td>
 				                <td class="userVal">
 				                    <input type="text" name="email" value="" class="userInput w100" />
 				                    <span style="font-size:16px;">＠</span>
@@ -208,7 +191,7 @@
 				                </td>
 				            </tr>
 				            <tr>
-				                <td class="userTit"><span class="c_imp">*</span> 휴대전화</td>
+				                <td class="userTit"> 휴대전화</td>
 				                <td class="userVal">
 				                    <input type="text" name="phonenum" value="" class="userInput w120" maxlength="11" />
 				                    <span style="margin:0 0 0 3px;color:#888888;">※ 하이픈을 제거하고 입력하세요.</span>

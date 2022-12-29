@@ -27,7 +27,7 @@ import utils.JSFunction;
  */
 public class WriteController extends HttpServlet{
 
-	//글쓰기 페이지로 진입할 때의 요청을 처리한다.
+	//글쓰기 페이지로 진입할 때의 요청을 처리한다. 단순히 포워드만 하면 된다.
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {

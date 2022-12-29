@@ -20,22 +20,11 @@ public class ViewController extends HttpServlet{
     */
    @Override
    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      //DAO객체 생성을 통해 커넥션풀 객체 획득
-      MVCBoardDAO dao = new MVCBoardDAO();
-      //일련번호 획득
+
+	  MVCBoardDAO dao = new MVCBoardDAO();
       String idx = req.getParameter("idx");
-      //조회수 증가
       dao.updateVisitCount(idx);
-      //게시물을 인출
       MVCBoardDTO dto = dao.selectView(idx);
-      //커넥션풀 자원 반납
-      
-//      if(request.getSession().getAttribute("id")==null||!request.getSession().getAttribute("id").equals("admin")) {
-//			ActionForward forward = new ActionForward();
-//		   	forward.setRedirect(false);
-//	   		forward.setPath("./member/memberList.jsp");
-//	   		return forward;
-//		}
       
       
       

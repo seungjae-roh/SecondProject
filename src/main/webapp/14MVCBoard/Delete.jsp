@@ -12,12 +12,7 @@
 <h2>파일첨부형 게시판 - 파일삭제</h2>
 <form name="writeFrm" method="post"
 	action="../mvcboard/delete.do?b_flag= ${ param.b_flag } &idx= ${ param.idx } ">
-     <!-- 
-     ※ hidden박스를 사용하는 경우 웹브라우저에는 숨김처리 되기 때문에 값이
-     제대로 입력되었는지 화면으로 확인할 수 없다. 따라서 개발자모드를 사용하거나
-     type을 디버깅용으로 잠깐 수정한 후 값이 제대로 입력되었는지 반드시
-     확인해야 한다.
-      -->	
+
     <input type="hidden" name="idx" value="${ param.idx }" />
     <table border="1" width="90%">
         <tr>

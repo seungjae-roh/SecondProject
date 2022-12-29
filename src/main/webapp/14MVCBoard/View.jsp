@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">  
 </head>
 <body>
-<!-- 우측 리스트 보면서 폼 완성 -->
+<!-- 리스트 보면서 폼 완성 -->
 <div class="container">
 	<div class="row">
 	<%@ include file="../inc/top.jsp" %>
@@ -27,9 +27,9 @@
 				color:#ffffff; background-color:rgb(133, 133, 133); border-radius:10px; font-size: 1.5em;">
                 웹사이트제작
             </div>
-            <%@ include file = "../inc/left.jsp" %>
+           
         </div>
-        <div class="col-9 pt-3" style="heigth:500px">
+        <div class="col-9 pt-3" style="heigth:650px">
 			<table class="table table-bordered" width="90%">
 				<colgroup>
 					<col width="15%"/> <col width="35%"/>
@@ -55,11 +55,11 @@
 			    </tr>
 			    <tr>
 			        <td>내용</td>
-			        <td colspan="3" height="100">
+			        <td colspan="3" height="300">
 			        	${ dto.content }
 			        	<c:if test="${ isImage eq true }">
 			        		<p>
-			        			<img src="../Uploads/${ dto.sfile }" alt="" />
+			        			<img src="../Uploads/${ dto.sfile }" />
 			        		</p>
 			        	</c:if>
 			        </td> 
@@ -67,9 +67,6 @@
 			    <tr>
 			        <td>첨부파일</td>
 			        <td>
-			        <!-- 첨부된 파일이 있는 경우에는 파일명과 다운로드 링크를 출력한다.
-			        다운로드가 완료되면 다운로드 횟수를 1 증가시키기 위해 게시물의 일련번호를
-			        파라미터로 전달한다. -->
 			        	<c:if test="${ not empty dto.ofile }">
 			        	${ dto.ofile }
 			        	<a href="../mvcboard/download.do?ofile=${ dto.ofile }&sfile=${ dto.sfile }&idx=${ dto.idx }">
@@ -84,7 +81,7 @@
 			    </tr>
 			    <tr>
 			    	<td colspan="4" align="center">
-			    		<c:if test="${ sessionScope.UserId eq 'admin' || sessionScope.UserId eq dto.getId }">
+			    		<c:if test="${ sessionScope.UserId eq 'admin' || sessionScope.UserId eq dto.id }">
 				    		<button type="button" class="btn btn-success"
 				    			onclick="location.href='../mvcboard/edit.do?b_flag=${ dto.b_flag }&idx=${ dto.idx }';">
 				    			수정하기

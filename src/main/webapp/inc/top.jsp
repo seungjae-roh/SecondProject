@@ -8,9 +8,8 @@
     <nav class="navbar navbar-expand-sm bg-dark navbar-secondary"
     	style="height:120px">
         <!-- Brand/logo -->
-        <a class="navbar-brand" href="#" style="width: 150px" >
-            <img src="../images/header.jpg" height="120px"
-            	onclick="location.href='../14MVCBoard/Default.jsp'">
+        <a class="navbar-brand" href="../mvcboard/default.do" style="width: 150px" >
+            <img src="../images/header.jpg" height="120px">
         </a>
 
         <!-- Links -->

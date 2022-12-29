@@ -17,7 +17,6 @@ public class DownloadController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
 		
-		//원본파일명, 저장된 파일명, 일련번호를 파라미터로 받아온다.
 		String ofile = req.getParameter("ofile");
 		String sfile = req.getParameter("sfile");
 		String idx = req.getParameter("idx");

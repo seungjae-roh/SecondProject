@@ -26,11 +26,10 @@ public class EditController extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		//수정페이지로 전달된 일련번호를 통해 게시물을 인출한다.
 		String idx = req.getParameter("idx");
 		MVCBoardDAO dao = new MVCBoardDAO();
 		MVCBoardDTO dto = dao.selectView(idx);
-		//인출된 내용은 request영역에 저장한 후 View로 포워드한다.
+
 		req.setAttribute("dto", dto);
 		req.getRequestDispatcher("/14MVCBoard/Edit.jsp").forward(req, resp);
 	}
@@ -41,15 +40,12 @@ public class EditController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
 		
-		//디렉토리의 물리적 경로 얻어오기
 		String saveDirectory = req.getServletContext().getRealPath("/Uploads");
 		
-		//파일업로드 제한 용량 얻어오기
 		ServletContext application = this.getServletContext();
 		int maxPostSize = 
 					Integer.parseInt(application.getInitParameter("maxPostSize"));
 		
-		//파일업로드 처리. 객체 생성과 동시에 업로드는 완료된다.
 		MultipartRequest mr = FileUtil.uploadFile(req, saveDirectory, maxPostSize);
 		
 		if (mr == null) {
@@ -57,7 +53,6 @@ public class EditController extends HttpServlet{
 			return;
 		}
 		
-		//파일을 제외한 나머지 폼값을 얻어온다.
 		//hidden박스에 저장된 내용(게시물 수정 및 파일 수정에 필요함)
 		String idx = mr.getParameter("idx");
 		String prevOfile = mr.getParameter("prevOfile");
@@ -69,15 +64,9 @@ public class EditController extends HttpServlet{
 		String title = mr.getParameter("title");
 		String content = mr.getParameter("content");
 		
-		/*
-		패스워드의 경우 인증완료시 session영역에 저장해 둔 것을 얻어온다.
-		update쿼리 실행시 where에 조건으로 추가된다.
-		즉, 검증이 완료된 사용자만 게시물을 수정할 수 있다.
-		 */
 		HttpSession session = req.getSession();
 		String pass = (String)session.getAttribute("pass");
 		
-		//DTO에 데이터 저장
 		MVCBoardDTO dto = new MVCBoardDTO();
 		dto.setIdx(idx);
 		dto.setId(id);
@@ -96,12 +85,10 @@ public class EditController extends HttpServlet{
 			String ext = fileName.substring(fileName.lastIndexOf("."));
 			String newFileName = now + ext;
 			
-			//파일객체 생성 후 파일명을 변경한다.
 			File oldFile = new File(saveDirectory + File.separator + fileName); 
 			File newFile = new File(saveDirectory + File.separator + newFileName);
 			oldFile.renameTo(newFile);
 			
-			//업로드된 파일명을 DTO에 저장한다.
 			dto.setOfile(fileName);
 			dto.setSfile(newFileName);
 			
@@ -114,13 +101,12 @@ public class EditController extends HttpServlet{
 			dto.setSfile(prevSfile);
 		}
 		
-		//DB연결및 업데이트 처리
 		MVCBoardDAO dao = new MVCBoardDAO();
 		int result = dao.editPost(dto);
 		dao.close();
 		
 		if (result == 1) {
-			//내용보기 화면으로 이동하여 수정된 내용을 확인한다.
+			//내용보기 화면으로 이동하여 수정된 내용을 확인한다.(b_flag 사용)
 			resp.sendRedirect
 				("../mvcboard/view.do?b_flag="+ b_flag + "&idx=" + dto.getIdx());
 		}

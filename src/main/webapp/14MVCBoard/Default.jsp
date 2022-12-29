@@ -146,7 +146,7 @@ label.right {
         <nav class="navbar navbar-expand-sm bg-dark navbar-secondary d-flex justify-content-centered"
         	style="height:120px">
         <!-- Brand/logo -->
-	        <a class="navbar-brand" href="#" style="width: 150px" >
+	        <a class="navbar-brand" href="../mvcboard/default.do" style="width: 150px" >
 	            <img src="../images/header.jpg" height="120px">
 	        </a>
 	        <div class="navbar-nav ms-auto py-0">
@@ -208,20 +208,29 @@ label.right {
 					        </tr>
 					</c:when>
 					<c:otherwise>
-						<c:forEach items="${ boardLists }" var="row" varStatus="loop">
-					        <tr align="center">
-					            <td>
-					            	${ map.totalCount - (((map.pageNum-1) * map.pageSize)
-					            		+ loop.index)}
-					            </td>
-					            <td align="left"> 
-					                <a href="../mvcboard/view.do?b_flag=${ row.b_flag }&idx=${ row.idx }">
-					                	${ row.title }</a> 
-					            </td>
-					            <td align="center">${ row.id }</td>
-					            <td align="center">${ row.visitcount }</td>
-					            <td align="center">${ row.postdate }</td>
-					        </tr>
+						<c:forEach items="${ boardLists }" var="row" varStatus="loop" end="5">
+							<table class="table table-bordered">
+								<tr>
+						            <th width="10%" style="text-align:center">번호</th>
+						            <th width="*">제목</th>
+						            <th width="15%" style="text-align:center">작성자</th>
+						            <th width="10%" style="text-align:center">조회수</th>
+						            <th width="15%" style="text-align:center">작성일</th>
+						        </tr>
+						        <tr align="center">
+						            <td>
+						            	${ map.totalCount - (((map.pageNum-1) * map.pageSize)
+						            		+ loop.index)}
+						            </td>
+						            <td align="left"> 
+						                <a href="../mvcboard/view.do?b_flag=notice&idx=${ row.idx }">
+						                	${ row.title }</a> 
+						            </td>
+						            <td align="center">${ row.id }</td>
+						            <td align="center">${ row.visitcount }</td>
+						            <td align="center">${ row.postdate }</td>
+						        </tr>
+						     </table>
 						 </c:forEach>
 					</c:otherwise>
 				</c:choose>
